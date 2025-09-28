@@ -53,11 +53,20 @@ const Index = () => {
               </div>
             </div>
             <div className="relative">
-              <img 
-                src="/img/4273dc70-8183-458c-83a0-954560d4e583.jpg" 
-                alt="Адвокат Антон Фисенко" 
-                className="rounded-lg shadow-2xl w-full max-w-md mx-auto"
-              />
+              <div className="relative">
+                <img 
+                  src="/img/4273dc70-8183-458c-83a0-954560d4e583.jpg" 
+                  alt="Адвокат Антон Фисенко" 
+                  className="rounded-lg shadow-2xl w-full max-w-md mx-auto"
+                />
+                <div className="absolute top-4 left-4">
+                  <img 
+                    src="/img/1f2c1742-9711-4c70-a327-b2e2fcf40ba9.jpg"
+                    alt="Логотип адвокатской палаты"
+                    className="w-16 h-16 bg-white rounded-full p-2 shadow-lg"
+                  />
+                </div>
+              </div>
               <div className="absolute -bottom-6 -left-6 bg-white text-primary p-4 rounded-lg shadow-lg">
                 <div className="font-semibold">Антон Фисенко</div>
                 <div className="text-sm text-muted-foreground">Адвокат по недвижимости</div>
