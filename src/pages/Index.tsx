@@ -77,7 +77,7 @@ const Index = () => {
                 <img 
                   src="https://cdn.poehali.dev/files/ca20d21c-fee1-4043-91fe-63d211328d56.jpeg" 
                   alt="Адвокат Владивосток" 
-                  className="rounded-lg shadow-2xl w-full max-w-md mx-auto px-0.5"
+                  className="shadow-2xl w-full max-w-md mx-auto px-0 rounded-lg"
                 />
               </div>
             </div>
