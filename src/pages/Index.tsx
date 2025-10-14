@@ -33,23 +33,23 @@ const Index = () => {
             <div className="grid lg:grid-cols-2 gap-8 items-start">
               <div className="space-y-6">
                 <h1 className="text-4xl lg:text-5xl font-montserrat font-bold leading-tight">
-                  Адвокат Владивосток — 15 лет опыта, 800+ выигранных дел
+                  Адвокат Владивосток — 15 лет опыта, 400+ выигранных дел
                 </h1>
                 <p className="text-xl text-navy-100 leading-relaxed">
                   Юридические услуги во всех районах Владивостока: гражданские, уголовные, семейные дела. Честная оценка перспектив. Конфиденциальность гарантирована.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-3">
+                <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
                     size="lg" 
-                    className="bg-white text-primary hover:bg-navy-50 font-semibold px-6 py-4 text-base"
+                    className="bg-white text-primary hover:bg-navy-50 font-semibold px-8 py-6 text-lg"
                     onClick={() => window.location.href = 'tel:+79084498985'}
                   >
                     Позвонить: +7 (908) 449-89-85
                   </Button>
                   <Button 
-                    size="default"
+                    size="lg"
                     variant="outline"
-                    className="border-2 border-white text-white hover:bg-white hover:text-primary font-semibold px-5 py-4 text-sm"
+                    className="border-2 border-white text-white hover:bg-white hover:text-primary font-semibold px-8 py-6 text-lg"
                     onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
                   >
                     Бесплатная консультация
@@ -57,7 +57,7 @@ const Index = () => {
                 </div>
                 <div className="flex items-center gap-8 pt-4">
                   <div className="text-center">
-                    <div className="text-4xl font-bold">800+</div>
+                    <div className="text-4xl font-bold">400+</div>
                     <div className="text-navy-200 text-sm">выигранных дел</div>
                   </div>
                   <div className="text-center">
@@ -509,7 +509,7 @@ const Index = () => {
                   size="lg"
                   variant="outline"
                   className="border-2 border-white text-white hover:bg-white hover:text-primary font-semibold"
-                  onClick={() => window.open('https://t.me/+79084498985', '_blank')}
+                  onClick={() => window.open('https://t.me/Adv_Fisenko', '_blank')}
                 >
                   <Icon name="Send" size={20} className="mr-2" />
                   Telegram
@@ -572,7 +572,7 @@ const Index = () => {
               <div>
                 <h3 className="font-montserrat font-bold text-xl mb-4">Адвокат Владивосток</h3>
                 <p className="text-navy-200 mb-2">15 лет успешной практики</p>
-                <p className="text-navy-200 mb-2">800+ выигранных дел</p>
+                <p className="text-navy-200 mb-2">400+ выигранных дел</p>
                 <p className="text-navy-200">Член Адвокатской палаты Приморского края</p>
               </div>
               <div>
@@ -583,12 +583,16 @@ const Index = () => {
                     <a href="tel:+79084498985" className="hover:text-white transition-colors">+7 (908) 449-89-85</a>
                   </p>
                   <p className="flex items-center gap-2">
-                    <Icon name="MapPin" size={18} />
-                    г. Владивосток, ул. Светланская, 85
+                    <Icon name="Send" size={18} />
+                    <a href="https://t.me/Adv_Fisenko" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">@Adv_Fisenko</a>
                   </p>
                   <p className="flex items-center gap-2">
-                    <Icon name="Clock" size={18} />
-                    Круглосуточно (экстренные случаи)
+                    <Icon name="Mail" size={18} />
+                    <a href="mailto:av@advokat.monster" className="hover:text-white transition-colors">av@advokat.monster</a>
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <Icon name="MapPin" size={18} />
+                    г. Владивосток, ул. Светланская, 85
                   </p>
                 </div>
               </div>
