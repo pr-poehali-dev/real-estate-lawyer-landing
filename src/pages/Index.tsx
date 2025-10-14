@@ -28,28 +28,28 @@ const Index = () => {
       
       <div className="min-h-screen bg-white">
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-navy-900 via-primary to-navy-800 text-white py-20">
+        <section className="bg-gradient-to-br from-navy-900 via-primary to-navy-800 text-white py-12">
           <div className="container mx-auto px-6 max-w-6xl">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="space-y-8">
+            <div className="grid lg:grid-cols-2 gap-8 items-start">
+              <div className="space-y-6">
                 <h1 className="text-4xl lg:text-5xl font-montserrat font-bold leading-tight">
                   Адвокат Владивосток — 15 лет опыта, 800+ выигранных дел
                 </h1>
                 <p className="text-xl text-navy-100 leading-relaxed">
                   Юридические услуги во всех районах Владивостока: гражданские, уголовные, семейные дела. Честная оценка перспектив. Конфиденциальность гарантирована.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-col sm:flex-row gap-3">
                   <Button 
                     size="lg" 
-                    className="bg-white text-primary hover:bg-navy-50 font-semibold px-8 py-6 text-lg"
+                    className="bg-white text-primary hover:bg-navy-50 font-semibold px-6 py-4 text-base"
                     onClick={() => window.location.href = 'tel:+79084498985'}
                   >
                     Позвонить: +7 (908) 449-89-85
                   </Button>
                   <Button 
-                    size="lg"
+                    size="default"
                     variant="outline"
-                    className="border-2 border-white text-white hover:bg-white hover:text-primary font-semibold px-8 py-6 text-lg"
+                    className="border-2 border-white text-white hover:bg-white hover:text-primary font-semibold px-5 py-4 text-sm"
                     onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
                   >
                     Бесплатная консультация
@@ -73,11 +73,11 @@ const Index = () => {
                   🕐 Круглосуточная поддержка для экстренных случаев
                 </div>
               </div>
-              <div className="relative">
+              <div className="relative lg:mt-0">
                 <img 
                   src="https://cdn.poehali.dev/files/ca20d21c-fee1-4043-91fe-63d211328d56.jpeg" 
                   alt="Адвокат Владивосток" 
-                  className="shadow-2xl w-full max-w-md mx-auto px-0 rounded-lg"
+                  className="rounded-lg shadow-2xl w-full h-auto object-cover"
                 />
               </div>
             </div>
