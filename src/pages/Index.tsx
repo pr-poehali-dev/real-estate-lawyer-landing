@@ -75,7 +75,7 @@ const Index = () => {
               </div>
               <div className="relative">
                 <img 
-                  src="/img/4273dc70-8183-458c-83a0-954560d4e583.jpg" 
+                  src="https://cdn.poehali.dev/files/ca20d21c-fee1-4043-91fe-63d211328d56.jpeg" 
                   alt="Адвокат Владивосток" 
                   className="rounded-lg shadow-2xl w-full max-w-md mx-auto"
                 />
