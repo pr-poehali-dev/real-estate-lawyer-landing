@@ -23,7 +23,7 @@ const Index = () => {
     <>
       <Helmet>
         <title>Адвокат Владивосток - опытный юрист с 15-летним стажем</title>
-        <meta name="description" content="Адвокат во Владивостоке с 15-летним опытом. 800+ выигранных дел, 92% успеха. Консультация от 3500₽. Все районы города. Звоните +7 (908) 449-89-85" />
+        <meta name="description" content="Адвокат во Владивостоке с 15-летним опытом. 200+ результативных дел, 92% успеха. Консультация от 3500₽. Все районы города. Звоните +7 (908) 449-89-85" />
       </Helmet>
       
       <div className="min-h-screen bg-white">
@@ -33,7 +33,7 @@ const Index = () => {
             <div className="grid lg:grid-cols-2 gap-8 items-start">
               <div className="space-y-6">
                 <h1 className="text-4xl lg:text-5xl font-montserrat font-bold leading-tight">
-                  Адвокат Владивосток — 15 лет опыта, 400+ выигранных дел
+                  Адвокат Владивосток — 15 лет опыта, 200+ результативных дел
                 </h1>
                 <p className="text-xl text-navy-100 leading-relaxed">
                   Юридические услуги во всех районах Владивостока: гражданские, уголовные, семейные дела. Честная оценка перспектив. Конфиденциальность гарантирована.
@@ -57,8 +57,8 @@ const Index = () => {
                 </div>
                 <div className="flex items-center gap-8 pt-4">
                   <div className="text-center">
-                    <div className="text-4xl font-bold">400+</div>
-                    <div className="text-navy-200 text-sm">выигранных дел</div>
+                    <div className="text-4xl font-bold">200+</div>
+                    <div className="text-navy-200 text-sm">результативных дел</div>
                   </div>
                   <div className="text-center">
                     <div className="text-4xl font-bold">92%</div>
@@ -483,85 +483,37 @@ const Index = () => {
               <h2 className="text-4xl font-montserrat font-bold mb-6">
                 Бесплатная экспресс-консультация по телефону
               </h2>
-              <p className="text-xl text-navy-100 mb-6">
-                Позвоните прямо сейчас или оставьте заявку — перезвоню в течение 15 минут
+              <p className="text-xl text-navy-100 mb-8">
+                Позвоните прямо сейчас — перезвоню в течение 15 минут
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
                 <Button 
                   size="lg"
-                  className="bg-white text-primary hover:bg-navy-50 font-bold px-10 py-8 text-2xl"
+                  className="bg-white text-primary hover:bg-navy-50 font-bold px-10 py-8 text-2xl shadow-xl"
                   onClick={() => window.location.href = 'tel:+79084498985'}
                 >
                   📞 +7 (908) 449-89-85
                 </Button>
               </div>
-              <div className="flex gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="border-2 border-white text-white hover:bg-white hover:text-primary font-semibold"
+                  className="bg-white text-primary hover:bg-navy-50 font-bold px-8 py-4 text-lg shadow-lg"
                   onClick={() => window.open('https://wa.me/79084498985', '_blank')}
                 >
-                  <Icon name="MessageCircle" size={20} className="mr-2" />
+                  <Icon name="MessageCircle" size={24} className="mr-2" />
                   WhatsApp
                 </Button>
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="border-2 border-white text-white hover:bg-white hover:text-primary font-semibold"
+                  className="bg-white text-primary hover:bg-navy-50 font-bold px-8 py-4 text-lg shadow-lg"
                   onClick={() => window.open('https://t.me/Adv_Fisenko', '_blank')}
                 >
-                  <Icon name="Send" size={20} className="mr-2" />
+                  <Icon name="Send" size={24} className="mr-2" />
                   Telegram
                 </Button>
               </div>
             </div>
-            
-            <Card className="max-w-2xl mx-auto">
-              <CardHeader>
-                <CardTitle className="text-center text-primary text-2xl">Или оставьте заявку</CardTitle>
-                <CardDescription className="text-center text-lg">
-                  Перезвоню в течение 15 минут. Конфиденциальность гарантирована.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <Input
-                      placeholder="Ваше имя"
-                      value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      className="text-lg py-6"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <Input
-                      placeholder="Телефон"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      className="text-lg py-6"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <Textarea
-                      placeholder="Кратко опишите вашу ситуацию (необязательно)"
-                      value={formData.description}
-                      onChange={(e) => setFormData({...formData, description: e.target.value})}
-                      className="min-h-32"
-                    />
-                  </div>
-                  <Button type="submit" size="lg" className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-6 text-lg">
-                    Получить консультацию
-                  </Button>
-                  <p className="text-center text-sm text-gray-500">
-                    Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности
-                  </p>
-                </form>
-              </CardContent>
-            </Card>
           </div>
         </section>
 
@@ -572,7 +524,7 @@ const Index = () => {
               <div>
                 <h3 className="font-montserrat font-bold text-xl mb-4">Адвокат Владивосток</h3>
                 <p className="text-navy-200 mb-2">15 лет успешной практики</p>
-                <p className="text-navy-200 mb-2">400+ выигранных дел</p>
+                <p className="text-navy-200 mb-2">200+ результативных дел</p>
                 <p className="text-navy-200">Член Адвокатской палаты Приморского края</p>
               </div>
               <div>
