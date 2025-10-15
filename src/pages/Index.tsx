@@ -48,8 +48,7 @@ const Index = () => {
                   </Button>
                   <Button 
                     size="lg"
-                    variant="outline"
-                    className="border-2 border-white text-white hover:bg-white hover:text-primary font-semibold px-8 py-6 text-lg"
+                    className="bg-white text-primary hover:bg-navy-50 font-semibold px-8 py-6 text-lg"
                     onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
                   >
                     Бесплатная консультация
@@ -507,7 +506,7 @@ const Index = () => {
                 <Button
                   size="lg"
                   className="bg-white text-primary hover:bg-navy-50 font-bold px-8 py-4 text-lg shadow-lg"
-                  onClick={() => window.open('https://t.me/Adv_Fisenko', '_blank')}
+                  onClick={() => window.open('https://t.me/fisenko_advocate', '_blank')}
                 >
                   <Icon name="Send" size={24} className="mr-2" />
                   Telegram
@@ -536,7 +535,7 @@ const Index = () => {
                   </p>
                   <p className="flex items-center gap-2">
                     <Icon name="Send" size={18} />
-                    <a href="https://t.me/Adv_Fisenko" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">@Adv_Fisenko</a>
+                    <a href="https://t.me/fisenko_advocate" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">@fisenko_advocate</a>
                   </p>
                   <p className="flex items-center gap-2">
                     <Icon name="Mail" size={18} />
