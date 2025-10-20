@@ -41,107 +41,60 @@ const Index = () => {
         <Icon name="Send" size={32} />
       </a>
       
-      {/* Floating Navigation Panel */}
-      <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50">
-        <div className="bg-white rounded-2xl shadow-2xl border-2 border-primary/20 overflow-hidden">
-          {/* Language Selector */}
-          <div className="bg-primary p-4 border-b-2 border-primary/30">
-            <div className="text-xs text-white/80 mb-2 font-semibold">Язык / Language</div>
-            <div className="grid grid-cols-2 gap-2">
-              <button
-                onClick={() => setLanguage('ru')}
-                className={`px-3 py-2 rounded-lg text-sm font-semibold transition-all ${
-                  language === 'ru' ? 'bg-white text-primary' : 'bg-primary/20 text-white hover:bg-primary/30'
-                }`}
-              >
-                🇷🇺 RU
-              </button>
-              <button
-                onClick={() => setLanguage('en')}
-                className={`px-3 py-2 rounded-lg text-sm font-semibold transition-all ${
-                  language === 'en' ? 'bg-white text-primary' : 'bg-primary/20 text-white hover:bg-primary/30'
-                }`}
-              >
-                🇬🇧 EN
-              </button>
-              <button
-                onClick={() => setLanguage('zh')}
-                className={`px-3 py-2 rounded-lg text-sm font-semibold transition-all ${
-                  language === 'zh' ? 'bg-white text-primary' : 'bg-primary/20 text-white hover:bg-primary/30'
-                }`}
-              >
-                🇨🇳 中文
-              </button>
-              <button
-                onClick={() => setLanguage('ko')}
-                className={`px-3 py-2 rounded-lg text-sm font-semibold transition-all ${
-                  language === 'ko' ? 'bg-white text-primary' : 'bg-primary/20 text-white hover:bg-primary/30'
-                }`}
-              >
-                🇰🇷 한국어
-              </button>
+      {/* Top Navigation Bar */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-md">
+        <div className="container mx-auto px-4 py-2">
+          <div className="flex items-center justify-between gap-4">
+            {/* Logo/Brand */}
+            <div className="flex items-center gap-2">
+              <Icon name="Scale" size={24} className="text-primary" />
+              <span className="font-bold text-primary hidden sm:inline">advokat.monster</span>
             </div>
+            
+            {/* Navigation Links */}
+            <nav className="hidden md:flex items-center gap-4">
+              <a href="#hero" className="text-sm font-medium text-gray-700 hover:text-primary transition-colors" onClick={(e) => { e.preventDefault(); document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' }); }}>Главная</a>
+              <a href="#services" className="text-sm font-medium text-gray-700 hover:text-primary transition-colors" onClick={(e) => { e.preventDefault(); document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }); }}>Услуги</a>
+              <a href="#about" className="text-sm font-medium text-gray-700 hover:text-primary transition-colors" onClick={(e) => { e.preventDefault(); document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }); }}>Обо мне</a>
+              <a href="#faq" className="text-sm font-medium text-gray-700 hover:text-primary transition-colors" onClick={(e) => { e.preventDefault(); document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' }); }}>Вопросы</a>
+              <a href="#contact" className="text-sm font-medium text-gray-700 hover:text-primary transition-colors" onClick={(e) => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}>Контакты</a>
+            </nav>
+            
+            {/* Language Selector */}
+            <div className="flex items-center gap-2">
+              <button onClick={() => setLanguage('ru')} className={`px-2 py-1 rounded text-xs font-semibold transition-all ${language === 'ru' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>🇷🇺</button>
+              <button onClick={() => setLanguage('en')} className={`px-2 py-1 rounded text-xs font-semibold transition-all ${language === 'en' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>🇬🇧</button>
+              <button onClick={() => setLanguage('zh')} className={`px-2 py-1 rounded text-xs font-semibold transition-all ${language === 'zh' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>🇨🇳</button>
+              <button onClick={() => setLanguage('ko')} className={`px-2 py-1 rounded text-xs font-semibold transition-all ${language === 'ko' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>🇰🇷</button>
+            </div>
+            
+            {/* Phone */}
+            <a href="tel:+79084498985" className="hidden lg:flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-primary/90 transition-colors">
+              <Icon name="Phone" size={16} />
+              +7 (908) 449-89-85
+            </a>
+            
+            {/* Mobile Menu Toggle */}
+            <button onClick={() => setShowNav(!showNav)} className="md:hidden p-2">
+              <Icon name="Menu" size={24} className="text-primary" />
+            </button>
           </div>
           
-          {/* Navigation Menu */}
-          <div className="p-4">
-            <button
-              onClick={() => setShowNav(!showNav)}
-              className="w-full flex items-center justify-between px-4 py-3 bg-primary/10 hover:bg-primary/20 rounded-lg transition-colors mb-3"
-            >
-              <span className="font-semibold text-primary">Меню</span>
-              <Icon name={showNav ? 'ChevronUp' : 'ChevronDown'} size={20} className="text-primary" />
-            </button>
-            
-            {showNav && (
-              <nav className="space-y-2">
-                <a
-                  href="#hero"
-                  className="flex items-center gap-2 px-4 py-2 hover:bg-primary/10 rounded-lg transition-colors text-sm font-medium text-gray-700"
-                  onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
-                >
-                  <Icon name="Home" size={16} />
-                  Главная
-                </a>
-                <a
-                  href="#services"
-                  className="flex items-center gap-2 px-4 py-2 hover:bg-primary/10 rounded-lg transition-colors text-sm font-medium text-gray-700"
-                  onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-                >
-                  <Icon name="Briefcase" size={16} />
-                  Услуги
-                </a>
-                <a
-                  href="#about"
-                  className="flex items-center gap-2 px-4 py-2 hover:bg-primary/10 rounded-lg transition-colors text-sm font-medium text-gray-700"
-                  onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
-                >
-                  <Icon name="User" size={16} />
-                  Обо мне
-                </a>
-                <a
-                  href="#faq"
-                  className="flex items-center gap-2 px-4 py-2 hover:bg-primary/10 rounded-lg transition-colors text-sm font-medium text-gray-700"
-                  onClick={() => document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' })}
-                >
-                  <Icon name="HelpCircle" size={16} />
-                  Вопросы
-                </a>
-                <a
-                  href="#contact"
-                  className="flex items-center gap-2 px-4 py-2 hover:bg-primary/10 rounded-lg transition-colors text-sm font-medium text-gray-700"
-                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                >
-                  <Icon name="Phone" size={16} />
-                  Контакты
-                </a>
-              </nav>
-            )}
-          </div>
+          {/* Mobile Menu */}
+          {showNav && (
+            <nav className="md:hidden mt-4 pb-2 space-y-2">
+              <a href="#hero" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary" onClick={(e) => { e.preventDefault(); setShowNav(false); document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' }); }}>Главная</a>
+              <a href="#services" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary" onClick={(e) => { e.preventDefault(); setShowNav(false); document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }); }}>Услуги</a>
+              <a href="#about" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary" onClick={(e) => { e.preventDefault(); setShowNav(false); document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }); }}>Обо мне</a>
+              <a href="#faq" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary" onClick={(e) => { e.preventDefault(); setShowNav(false); document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' }); }}>Вопросы</a>
+              <a href="#contact" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary" onClick={(e) => { e.preventDefault(); setShowNav(false); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}>Контакты</a>
+              <a href="tel:+79084498985" className="block py-2 text-sm font-semibold text-primary">📞 +7 (908) 449-89-85</a>
+            </nav>
+          )}
         </div>
-      </div>
+      </header>
       
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white pt-16">
         {/* Hero Section */}
         <section id="hero" className="bg-gradient-to-br from-navy-900 via-primary to-navy-800 text-white py-12">
           <div className="container mx-auto px-6 max-w-6xl">
@@ -193,6 +146,104 @@ const Index = () => {
                   alt="Адвокат Владивосток" 
                   className="rounded-lg shadow-2xl w-full h-auto object-cover"
                 />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Free Guide Section */}
+        <section className="py-16 bg-gradient-to-br from-yellow-50 to-orange-50 border-y-4 border-yellow-400">
+          <div className="container mx-auto px-6 max-w-5xl">
+            <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-12">
+              <div className="text-center mb-8">
+                <div className="inline-block bg-yellow-400 text-yellow-900 px-4 py-2 rounded-full font-bold text-sm mb-4">
+                  🎁 БЕСПЛАТНЫЙ ПОДАРОК
+                </div>
+                <h2 className="text-3xl md:text-4xl font-montserrat font-bold text-primary mb-4">
+                  Гайд от адвоката: «10 ошибок, которые убивают ваше дело»
+                </h2>
+                <p className="text-lg text-gray-700">
+                  Узнайте, как избежать типичных ошибок в юридических спорах и защитить свои права
+                </p>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-6 mb-8">
+                <div className="flex items-start gap-3">
+                  <div className="bg-green-100 p-2 rounded-lg">
+                    <Icon name="CheckCircle2" size={24} className="text-green-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-800 mb-1">Что говорить полиции</h3>
+                    <p className="text-sm text-gray-600">Правильные формулировки при общении с правоохранителями</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="bg-green-100 p-2 rounded-lg">
+                    <Icon name="CheckCircle2" size={24} className="text-green-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-800 mb-1">Как собирать доказательства</h3>
+                    <p className="text-sm text-gray-600">Чтобы не потерять важные улики и свидетельства</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="bg-green-100 p-2 rounded-lg">
+                    <Icon name="CheckCircle2" size={24} className="text-green-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-800 mb-1">Когда нужен адвокат</h3>
+                    <p className="text-sm text-gray-600">Критические моменты, когда нельзя медлить</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="bg-green-100 p-2 rounded-lg">
+                    <Icon name="CheckCircle2" size={24} className="text-green-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-800 mb-1">Ошибки в договорах</h3>
+                    <p className="text-sm text-gray-600">На что обратить внимание перед подписанием</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-primary/5 border-2 border-primary/20 rounded-xl p-6 mb-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <Icon name="Gift" size={32} className="text-primary" />
+                  <div>
+                    <h3 className="font-bold text-lg text-primary">Получите гайд бесплатно!</h3>
+                    <p className="text-sm text-gray-600">Оставьте контакт — отправим PDF в Telegram или WhatsApp</p>
+                  </div>
+                </div>
+                <form onSubmit={(e) => { e.preventDefault(); alert('Спасибо! Гайд отправлен на ваш номер'); }} className="flex flex-col sm:flex-row gap-3">
+                  <Input
+                    type="tel"
+                    placeholder="Ваш телефон"
+                    required
+                    className="flex-1 py-6 text-lg"
+                  />
+                  <Button type="submit" size="lg" className="bg-yellow-500 hover:bg-yellow-600 text-yellow-900 font-bold px-8 py-6 text-lg shadow-lg">
+                    <Icon name="Download" size={20} className="mr-2" />
+                    Получить гайд
+                  </Button>
+                </form>
+                <p className="text-xs text-gray-500 mt-3 text-center">
+                  Мы не передаём ваши данные третьим лицам. Конфиденциальность гарантирована.
+                </p>
+              </div>
+              
+              <div className="flex items-center justify-center gap-4 text-sm text-gray-600">
+                <div className="flex items-center gap-2">
+                  <Icon name="Users" size={16} className="text-primary" />
+                  <span>1200+ скачали</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Icon name="Star" size={16} className="text-yellow-500" />
+                  <span>4.9/5 оценка</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Icon name="FileText" size={16} className="text-primary" />
+                  <span>8 страниц</span>
+                </div>
               </div>
             </div>
           </div>
