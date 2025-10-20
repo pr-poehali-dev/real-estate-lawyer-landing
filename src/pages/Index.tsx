@@ -13,6 +13,9 @@ const Index = () => {
     phone: '',
     description: ''
   });
+  
+  const [language, setLanguage] = useState<'ru' | 'en' | 'zh' | 'ko'>('ru');
+  const [showNav, setShowNav] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,9 +41,109 @@ const Index = () => {
         <Icon name="Send" size={32} />
       </a>
       
+      {/* Floating Navigation Panel */}
+      <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50">
+        <div className="bg-white rounded-2xl shadow-2xl border-2 border-primary/20 overflow-hidden">
+          {/* Language Selector */}
+          <div className="bg-primary p-4 border-b-2 border-primary/30">
+            <div className="text-xs text-white/80 mb-2 font-semibold">Язык / Language</div>
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                onClick={() => setLanguage('ru')}
+                className={`px-3 py-2 rounded-lg text-sm font-semibold transition-all ${
+                  language === 'ru' ? 'bg-white text-primary' : 'bg-primary/20 text-white hover:bg-primary/30'
+                }`}
+              >
+                🇷🇺 RU
+              </button>
+              <button
+                onClick={() => setLanguage('en')}
+                className={`px-3 py-2 rounded-lg text-sm font-semibold transition-all ${
+                  language === 'en' ? 'bg-white text-primary' : 'bg-primary/20 text-white hover:bg-primary/30'
+                }`}
+              >
+                🇬🇧 EN
+              </button>
+              <button
+                onClick={() => setLanguage('zh')}
+                className={`px-3 py-2 rounded-lg text-sm font-semibold transition-all ${
+                  language === 'zh' ? 'bg-white text-primary' : 'bg-primary/20 text-white hover:bg-primary/30'
+                }`}
+              >
+                🇨🇳 中文
+              </button>
+              <button
+                onClick={() => setLanguage('ko')}
+                className={`px-3 py-2 rounded-lg text-sm font-semibold transition-all ${
+                  language === 'ko' ? 'bg-white text-primary' : 'bg-primary/20 text-white hover:bg-primary/30'
+                }`}
+              >
+                🇰🇷 한국어
+              </button>
+            </div>
+          </div>
+          
+          {/* Navigation Menu */}
+          <div className="p-4">
+            <button
+              onClick={() => setShowNav(!showNav)}
+              className="w-full flex items-center justify-between px-4 py-3 bg-primary/10 hover:bg-primary/20 rounded-lg transition-colors mb-3"
+            >
+              <span className="font-semibold text-primary">Меню</span>
+              <Icon name={showNav ? 'ChevronUp' : 'ChevronDown'} size={20} className="text-primary" />
+            </button>
+            
+            {showNav && (
+              <nav className="space-y-2">
+                <a
+                  href="#hero"
+                  className="flex items-center gap-2 px-4 py-2 hover:bg-primary/10 rounded-lg transition-colors text-sm font-medium text-gray-700"
+                  onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  <Icon name="Home" size={16} />
+                  Главная
+                </a>
+                <a
+                  href="#services"
+                  className="flex items-center gap-2 px-4 py-2 hover:bg-primary/10 rounded-lg transition-colors text-sm font-medium text-gray-700"
+                  onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  <Icon name="Briefcase" size={16} />
+                  Услуги
+                </a>
+                <a
+                  href="#about"
+                  className="flex items-center gap-2 px-4 py-2 hover:bg-primary/10 rounded-lg transition-colors text-sm font-medium text-gray-700"
+                  onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  <Icon name="User" size={16} />
+                  Обо мне
+                </a>
+                <a
+                  href="#faq"
+                  className="flex items-center gap-2 px-4 py-2 hover:bg-primary/10 rounded-lg transition-colors text-sm font-medium text-gray-700"
+                  onClick={() => document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  <Icon name="HelpCircle" size={16} />
+                  Вопросы
+                </a>
+                <a
+                  href="#contact"
+                  className="flex items-center gap-2 px-4 py-2 hover:bg-primary/10 rounded-lg transition-colors text-sm font-medium text-gray-700"
+                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  <Icon name="Phone" size={16} />
+                  Контакты
+                </a>
+              </nav>
+            )}
+          </div>
+        </div>
+      </div>
+      
       <div className="min-h-screen bg-white">
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-navy-900 via-primary to-navy-800 text-white py-12">
+        <section id="hero" className="bg-gradient-to-br from-navy-900 via-primary to-navy-800 text-white py-12">
           <div className="container mx-auto px-6 max-w-6xl">
             <div className="grid lg:grid-cols-2 gap-8 items-start">
               <div className="space-y-6">
@@ -96,7 +199,7 @@ const Index = () => {
         </section>
 
         {/* Services Section */}
-        <section className="py-20">
+        <section id="services" className="py-20">
           <div className="container mx-auto px-6 max-w-6xl">
             <h2 className="text-4xl font-montserrat font-bold text-center mb-16 text-primary">
               Юридические услуги во Владивостоке
@@ -212,8 +315,8 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Why Choose Section */}
-        <section className="py-20">
+        {/* About Section - Why Choose */}
+        <section id="about" className="py-20">
           <div className="container mx-auto px-6 max-w-6xl">
             <h2 className="text-4xl font-montserrat font-bold text-center mb-16 text-primary">
               Почему выбирают нашего адвоката
@@ -438,7 +541,7 @@ const Index = () => {
         </section>
 
         {/* FAQ Section */}
-        <section className="py-20 bg-muted">
+        <section id="faq" className="py-20 bg-muted">
           <div className="container mx-auto px-6 max-w-4xl">
             <h2 className="text-4xl font-montserrat font-bold text-center mb-16 text-primary">
               Часто задаваемые вопросы
@@ -487,8 +590,8 @@ const Index = () => {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section id="contact-form" className="py-20 bg-primary text-white">
+        {/* Contact Section - CTA */}
+        <section id="contact" className="py-20 bg-primary text-white">
           <div className="container mx-auto px-6 max-w-4xl">
             <div className="text-center mb-12">
               <h2 className="text-4xl font-montserrat font-bold mb-6">
