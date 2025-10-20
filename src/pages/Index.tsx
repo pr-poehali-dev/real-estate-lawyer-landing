@@ -16,6 +16,8 @@ const Index = () => {
   
   const [language, setLanguage] = useState<'ru' | 'en' | 'zh' | 'ko'>('ru');
   const [showNav, setShowNav] = useState(false);
+  const [guideConsent, setGuideConsent] = useState(false);
+  const [guidePhone, setGuidePhone] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -214,21 +216,42 @@ const Index = () => {
                     <p className="text-sm text-gray-600">Оставьте контакт — отправим PDF в Telegram или WhatsApp</p>
                   </div>
                 </div>
-                <form onSubmit={(e) => { e.preventDefault(); alert('Спасибо! Гайд отправлен на ваш номер'); }} className="flex flex-col sm:flex-row gap-3">
-                  <Input
-                    type="tel"
-                    placeholder="Ваш телефон"
-                    required
-                    className="flex-1 py-6 text-lg"
-                  />
-                  <Button type="submit" size="lg" className="bg-yellow-500 hover:bg-yellow-600 text-yellow-900 font-bold px-8 py-6 text-lg shadow-lg">
-                    <Icon name="Download" size={20} className="mr-2" />
-                    Получить гайд
-                  </Button>
+                <form onSubmit={(e) => { e.preventDefault(); if (guideConsent) { alert('Спасибо! Гайд отправлен на ваш номер'); setGuidePhone(''); setGuideConsent(false); } }} className="space-y-4">
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Input
+                      type="tel"
+                      placeholder="Ваш телефон"
+                      value={guidePhone}
+                      onChange={(e) => setGuidePhone(e.target.value)}
+                      required
+                      className="flex-1 py-6 text-lg"
+                    />
+                    <Button 
+                      type="submit" 
+                      size="lg" 
+                      disabled={!guideConsent}
+                      className="bg-yellow-500 hover:bg-yellow-600 text-yellow-900 font-bold px-8 py-6 text-lg shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <Icon name="Download" size={20} className="mr-2" />
+                      Получить гайд
+                    </Button>
+                  </div>
+                  
+                  <label className="flex items-start gap-3 cursor-pointer group">
+                    <input
+                      type="checkbox"
+                      checked={guideConsent}
+                      onChange={(e) => setGuideConsent(e.target.checked)}
+                      className="mt-1 w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary cursor-pointer"
+                      required
+                    />
+                    <span className="text-sm text-gray-700 group-hover:text-gray-900">
+                      Я согласен на обработку персональных данных в соответствии с{' '}
+                      <a href="#offer" className="text-primary underline hover:text-primary/80">договором оферты</a>
+                      {' '}и политикой конфиденциальности
+                    </span>
+                  </label>
                 </form>
-                <p className="text-xs text-gray-500 mt-3 text-center">
-                  Мы не передаём ваши данные третьим лицам. Конфиденциальность гарантирована.
-                </p>
               </div>
               
               <div className="flex items-center justify-center gap-4 text-sm text-gray-600">
