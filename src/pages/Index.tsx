@@ -22,9 +22,21 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>Адвокат Владивосток - опытный юрист с 15-летним стажем</title>
+        <title>Адвокат Владивосток - опытный юрист с 15-летним стажем | advokat.monster</title>
         <meta name="description" content="Адвокат во Владивостоке с 15-летним опытом. 200+ результативных дел, 92% успеха. Консультация от 3500₽. Все районы города. Звоните +7 (908) 449-89-85" />
+        <link rel="canonical" href="https://advokat.monster" />
       </Helmet>
+      
+      {/* Floating Telegram Button */}
+      <a
+        href="https://t.me/fisenko_advocate"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed left-6 bottom-6 z-50 bg-[#0088cc] text-white rounded-full p-4 shadow-2xl hover:scale-110 transition-transform animate-pulse"
+        aria-label="Писать в Telegram"
+      >
+        <Icon name="Send" size={32} />
+      </a>
       
       <div className="min-h-screen bg-white">
         {/* Hero Section */}
