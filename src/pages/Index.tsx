@@ -7,6 +7,31 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import Icon from '@/components/ui/icon';
 import { Helmet } from 'react-helmet';
 
+type Language = 'ru' | 'en' | 'zh' | 'ko';
+
+const translations: Record<Language, any> = {
+  ru: {
+    nav: { home: 'Главная', services: 'Услуги', about: 'Обо мне', faq: 'Вопросы', contact: 'Контакты' },
+    hero: { title: 'Адвокат Владивосток — 15 лет опыта, 200+ результативных дел', subtitle: 'Юридические услуги во всех районах Владивостока: гражданские, уголовные, семейные дела. Честная оценка перспектив. Конфиденциальность гарантирована.', call: 'Позвонить:', consultation: 'Бесплатная консультация' },
+    guide: { title: 'Гайд от адвоката: «10 ошибок, которые убивают ваше дело»', get: 'Получить гайд', phone: 'Ваш телефон', consent: 'Я согласен на обработку персональных данных' }
+  },
+  en: {
+    nav: { home: 'Home', services: 'Services', about: 'About', faq: 'FAQ', contact: 'Contact' },
+    hero: { title: 'Vladivostok Lawyer — 15 years experience, 200+ successful cases', subtitle: 'Legal services in all districts of Vladivostok: civil, criminal, family cases. Honest assessment. Confidentiality guaranteed.', call: 'Call:', consultation: 'Free Consultation' },
+    guide: { title: 'Lawyer\'s Guide: "10 Mistakes That Kill Your Case"', get: 'Get Guide', phone: 'Your phone', consent: 'I agree to the processing of personal data' }
+  },
+  zh: {
+    nav: { home: '首页', services: '服务', about: '关于', faq: '常见问题', contact: '联系' },
+    hero: { title: '海参崴律师 — 15年经验，200+成功案例', subtitle: '海参崴全区法律服务：民事、刑事、家庭案件。诚实评估。保证保密。', call: '电话：', consultation: '免费咨询' },
+    guide: { title: '律师指南：“10个毁掉您案件的错误”', get: '获取指南', phone: '您的电话', consent: '我同意处理个人数据' }
+  },
+  ko: {
+    nav: { home: '홈', services: '서비스', about: '소개', faq: 'FAQ', contact: '연락처' },
+    hero: { title: '블라디보스토크 변호사 — 15년 경력, 200+건 성공 사례', subtitle: '블라디보스토크 전지역 법률 서비스: 민사, 형사, 가족 사건. 정직한 평가. 기밀 보장.', call: '전화:', consultation: '무료 상담' },
+    guide: { title: '변호사 가이드: "10가지 사건을 망치는 실수"', get: '가이드 받기', phone: '전화번호', consent: '개인정보 처리에 동의합니다' }
+  }
+};
+
 const Index = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -14,7 +39,8 @@ const Index = () => {
     description: ''
   });
   
-  const [language, setLanguage] = useState<'ru' | 'en' | 'zh' | 'ko'>('ru');
+  const [language, setLanguage] = useState<Language>('ru');
+  const t = translations[language];
   const [showNav, setShowNav] = useState(false);
   const [guideConsent, setGuideConsent] = useState(false);
   const [guidePhone, setGuidePhone] = useState('');
@@ -32,16 +58,27 @@ const Index = () => {
         <link rel="canonical" href="https://advokat.monster" />
       </Helmet>
       
-      {/* Floating Telegram Button */}
-      <a
-        href="https://t.me/fisenko_advocate"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed left-6 bottom-6 z-50 bg-[#0088cc] text-white rounded-full p-4 shadow-2xl hover:scale-110 transition-transform animate-pulse"
-        aria-label="Писать в Telegram"
-      >
-        <Icon name="Send" size={32} />
-      </a>
+      {/* Floating Contact Buttons */}
+      <div className="fixed left-6 bottom-6 z-50 flex flex-col gap-3">
+        <a
+          href="https://t.me/fisenko_advocate"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-[#0088cc] text-white rounded-full p-4 shadow-2xl hover:scale-110 transition-transform"
+          aria-label="Telegram"
+        >
+          <Icon name="Send" size={32} />
+        </a>
+        <a
+          href="weixin://"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-[#09b83e] text-white rounded-full p-4 shadow-2xl hover:scale-110 transition-transform"
+          aria-label="WeChat"
+        >
+          <Icon name="MessageCircle" size={32} />
+        </a>
+      </div>
       
       {/* Top Navigation Bar */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-md">
@@ -55,11 +92,11 @@ const Index = () => {
             
             {/* Navigation Links */}
             <nav className="hidden md:flex items-center gap-4">
-              <a href="#hero" className="text-sm font-medium text-gray-700 hover:text-primary transition-colors" onClick={(e) => { e.preventDefault(); document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' }); }}>Главная</a>
-              <a href="#services" className="text-sm font-medium text-gray-700 hover:text-primary transition-colors" onClick={(e) => { e.preventDefault(); document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }); }}>Услуги</a>
-              <a href="#about" className="text-sm font-medium text-gray-700 hover:text-primary transition-colors" onClick={(e) => { e.preventDefault(); document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }); }}>Обо мне</a>
-              <a href="#faq" className="text-sm font-medium text-gray-700 hover:text-primary transition-colors" onClick={(e) => { e.preventDefault(); document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' }); }}>Вопросы</a>
-              <a href="#contact" className="text-sm font-medium text-gray-700 hover:text-primary transition-colors" onClick={(e) => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}>Контакты</a>
+              <a href="#hero" className="text-sm font-medium text-gray-700 hover:text-primary transition-colors" onClick={(e) => { e.preventDefault(); document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' }); }}>{t.nav.home}</a>
+              <a href="#services" className="text-sm font-medium text-gray-700 hover:text-primary transition-colors" onClick={(e) => { e.preventDefault(); document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }); }}>{t.nav.services}</a>
+              <a href="#about" className="text-sm font-medium text-gray-700 hover:text-primary transition-colors" onClick={(e) => { e.preventDefault(); document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }); }}>{t.nav.about}</a>
+              <a href="#faq" className="text-sm font-medium text-gray-700 hover:text-primary transition-colors" onClick={(e) => { e.preventDefault(); document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' }); }}>{t.nav.faq}</a>
+              <a href="#contact" className="text-sm font-medium text-gray-700 hover:text-primary transition-colors" onClick={(e) => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}>{t.nav.contact}</a>
             </nav>
             
             {/* Language Selector */}
@@ -85,11 +122,11 @@ const Index = () => {
           {/* Mobile Menu */}
           {showNav && (
             <nav className="md:hidden mt-4 pb-2 space-y-2">
-              <a href="#hero" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary" onClick={(e) => { e.preventDefault(); setShowNav(false); document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' }); }}>Главная</a>
-              <a href="#services" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary" onClick={(e) => { e.preventDefault(); setShowNav(false); document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }); }}>Услуги</a>
-              <a href="#about" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary" onClick={(e) => { e.preventDefault(); setShowNav(false); document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }); }}>Обо мне</a>
-              <a href="#faq" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary" onClick={(e) => { e.preventDefault(); setShowNav(false); document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' }); }}>Вопросы</a>
-              <a href="#contact" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary" onClick={(e) => { e.preventDefault(); setShowNav(false); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}>Контакты</a>
+              <a href="#hero" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary" onClick={(e) => { e.preventDefault(); setShowNav(false); document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' }); }}>{t.nav.home}</a>
+              <a href="#services" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary" onClick={(e) => { e.preventDefault(); setShowNav(false); document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }); }}>{t.nav.services}</a>
+              <a href="#about" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary" onClick={(e) => { e.preventDefault(); setShowNav(false); document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }); }}>{t.nav.about}</a>
+              <a href="#faq" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary" onClick={(e) => { e.preventDefault(); setShowNav(false); document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' }); }}>{t.nav.faq}</a>
+              <a href="#contact" className="block py-2 text-sm font-medium text-gray-700 hover:text-primary" onClick={(e) => { e.preventDefault(); setShowNav(false); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}>{t.nav.contact}</a>
               <a href="tel:+79084498985" className="block py-2 text-sm font-semibold text-primary">📞 +7 (908) 449-89-85</a>
             </nav>
           )}
@@ -103,10 +140,10 @@ const Index = () => {
             <div className="grid lg:grid-cols-2 gap-8 items-start">
               <div className="space-y-6">
                 <h1 className="text-4xl lg:text-5xl font-montserrat font-bold leading-tight">
-                  Адвокат Владивосток — 15 лет опыта, 200+ результативных дел
+                  {t.hero.title}
                 </h1>
                 <p className="text-xl text-navy-100 leading-relaxed">
-                  Юридические услуги во всех районах Владивостока: гражданские, уголовные, семейные дела. Честная оценка перспектив. Конфиденциальность гарантирована.
+                  {t.hero.subtitle}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
@@ -114,14 +151,14 @@ const Index = () => {
                     className="bg-white text-primary hover:bg-navy-50 font-semibold px-8 py-6 text-lg"
                     onClick={() => window.location.href = 'tel:+79084498985'}
                   >
-                    Позвонить: +7 (908) 449-89-85
+                    {t.hero.call} +7 (908) 449-89-85
                   </Button>
                   <Button 
                     size="lg"
                     className="bg-white text-primary hover:bg-navy-50 font-semibold px-8 py-6 text-lg"
-                    onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
+                    onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                   >
-                    Бесплатная консультация
+                    {t.hero.consultation}
                   </Button>
                 </div>
                 <div className="flex items-center gap-8 pt-4">
@@ -162,7 +199,7 @@ const Index = () => {
                   🎁 БЕСПЛАТНЫЙ ПОДАРОК
                 </div>
                 <h2 className="text-3xl md:text-4xl font-montserrat font-bold text-primary mb-4">
-                  Гайд от адвоката: «10 ошибок, которые убивают ваше дело»
+                  {t.guide.title}
                 </h2>
                 <p className="text-lg text-gray-700">
                   Узнайте, как избежать типичных ошибок в юридических спорах и защитить свои права
@@ -220,7 +257,7 @@ const Index = () => {
                   <div className="flex flex-col sm:flex-row gap-3">
                     <Input
                       type="tel"
-                      placeholder="Ваш телефон"
+                      placeholder={t.guide.phone}
                       value={guidePhone}
                       onChange={(e) => setGuidePhone(e.target.value)}
                       required
@@ -233,7 +270,7 @@ const Index = () => {
                       className="bg-yellow-500 hover:bg-yellow-600 text-yellow-900 font-bold px-8 py-6 text-lg shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <Icon name="Download" size={20} className="mr-2" />
-                      Получить гайд
+                      {t.guide.get}
                     </Button>
                   </div>
                   
@@ -246,9 +283,7 @@ const Index = () => {
                       required
                     />
                     <span className="text-sm text-gray-700 group-hover:text-gray-900">
-                      Я согласен на обработку персональных данных в соответствии с{' '}
-                      <a href="#offer" className="text-primary underline hover:text-primary/80">договором оферты</a>
-                      {' '}и политикой конфиденциальности
+                      {t.guide.consent}
                     </span>
                   </label>
                 </form>
