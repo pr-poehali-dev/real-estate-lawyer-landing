@@ -139,6 +139,8 @@ const Index = () => {
     description: ''
   });
   
+  const [contactConsent, setContactConsent] = useState(false);
+  
   const [language, setLanguage] = useState<Language>('ru');
   const t = translations[language];
   const [showNav, setShowNav] = useState(false);
@@ -560,7 +562,36 @@ const Index = () => {
                     rows={4}
                   />
                 </div>
-                <Button type="submit" className="w-full py-5 text-base">Отправить заявку</Button>
+                <label className="flex items-start gap-3 cursor-pointer group">
+                  <input
+                    type="checkbox"
+                    checked={contactConsent}
+                    onChange={(e) => setContactConsent(e.target.checked)}
+                    className="mt-1 w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary cursor-pointer"
+                    required
+                  />
+                  <span className="text-sm text-gray-700 group-hover:text-gray-900">
+                    Я согласен на обработку персональных данных в соответствии с{' '}
+                    <a 
+                      href="https://www.consultant.ru/document/cons_doc_LAW_61801/" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-primary underline hover:text-primary/80"
+                    >
+                      ФЗ-152 о персональных данных
+                    </a>
+                    {' '}и{' '}
+                    <a 
+                      href="https://www.consultant.ru/document/cons_doc_LAW_8264/" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-primary underline hover:text-primary/80"
+                    >
+                      договором оферты
+                    </a>
+                  </span>
+                </label>
+                <Button type="submit" disabled={!contactConsent} className="w-full py-5 text-base disabled:opacity-50 disabled:cursor-not-allowed">Отправить заявку</Button>
               </form>
             </Card>
           </div>
