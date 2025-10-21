@@ -179,7 +179,7 @@ const Index = () => {
       />
       
       {/* Floating Contact Buttons */}
-      <div className="fixed right-4 top-20 z-50 flex flex-row gap-3">
+      <div className="fixed right-4 top-20 z-50 flex flex-col gap-3">
         <button
           onClick={() => handleSocialClick('https://t.me/fisenko_advocate', 'telegram')}
           className="bg-[#0088cc] text-white rounded-full p-3 shadow-2xl hover:scale-110 transition-transform"
@@ -313,7 +313,7 @@ const Index = () => {
                 />
                 <div className="mt-4 text-center">
                   <p className="text-xl sm:text-2xl font-bold text-white">Антон Фисенко</p>
-                  <p className="text-navy-100 text-sm sm:text-base">Адвокат с 15-летним стажем</p>
+                  <p className="text-navy-100 text-sm sm:text-base">Адвокат</p>
                 </div>
               </div>
             </div>
@@ -397,17 +397,17 @@ const Index = () => {
         </section>
 
         {/* Services Section */}
-        <section id="services" className="py-12 sm:py-16">
+        <section id="services" className="py-8 sm:py-12">
           <div className="container mx-auto px-4 max-w-6xl">
-            <h2 className="text-3xl sm:text-4xl font-montserrat font-bold text-center mb-10 text-primary">
+            <h2 className="text-2xl sm:text-3xl font-montserrat font-bold text-center mb-6 text-primary">
               Юридические услуги
             </h2>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
                 {
                   icon: "Users",
                   title: "Семейный адвокат",
-                  description: "Разводы, раздел имущества, алименты, опека",
+                  description: "Разводы, раздел имущества, алименты",
                   price: "от 5 000 ₽"
                 },
                 {
@@ -419,40 +419,39 @@ const Index = () => {
                 {
                   icon: "ShieldAlert",
                   title: "Уголовная защита",
-                  description: "Защита на всех стадиях процесса",
+                  description: "Защита на всех стадиях",
                   price: "от 7 000 ₽"
                 },
                 {
                   icon: "Home",
                   title: "Недвижимость",
-                  description: "Сопровождение сделок, споры",
+                  description: "Сопровождение сделок",
                   price: "от 5 000 ₽"
                 },
                 {
                   icon: "Briefcase",
                   title: "Трудовые споры",
-                  description: "Увольнение, зарплата, права",
+                  description: "Увольнение, зарплата",
                   price: "от 3 500 ₽"
                 },
                 {
                   icon: "FileText",
                   title: "Консультация",
-                  description: "Анализ документов, оценка дела",
+                  description: "Анализ документов",
                   price: "от 3 500 ₽"
                 }
               ].map((service, index) => (
-                <Card key={index} className="hover:shadow-xl transition-all duration-300 border-2 hover:border-primary">
-                  <CardHeader>
-                    <div className="bg-primary text-white p-3 rounded-lg w-12 h-12 flex items-center justify-center mb-3">
-                      <Icon name={service.icon} size={24} />
+                <Card key={index} className="hover:shadow-lg transition-all duration-300 border hover:border-primary">
+                  <CardHeader className="pb-3">
+                    <div className="bg-primary text-white p-2 rounded-lg w-10 h-10 flex items-center justify-center mb-2">
+                      <Icon name={service.icon} size={20} />
                     </div>
-                    <CardTitle className="font-montserrat text-lg">{service.title}</CardTitle>
+                    <CardTitle className="font-montserrat text-base">{service.title}</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-3">
-                    <p className="text-gray-600 text-sm">{service.description}</p>
-                    <div className="border-t pt-3">
-                      <p className="text-xl font-bold text-primary">{service.price}</p>
-                      <p className="text-xs text-gray-500">за день в суде</p>
+                  <CardContent className="space-y-2 pt-0">
+                    <p className="text-gray-600 text-xs">{service.description}</p>
+                    <div className="border-t pt-2">
+                      <p className="text-lg font-bold text-primary">{service.price}</p>
                     </div>
                   </CardContent>
                 </Card>
