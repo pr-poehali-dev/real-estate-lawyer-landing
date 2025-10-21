@@ -140,6 +140,8 @@ const Index = () => {
   });
   
   const [contactConsent, setContactConsent] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
   
   const [language, setLanguage] = useState<Language>('ru');
   const t = translations[language];
@@ -148,9 +150,39 @@ const Index = () => {
   const [guideData, setGuideData] = useState({ name: '', phone: '', email: '' });
   const [socialModal, setSocialModal] = useState<{ show: boolean; url: string; type: string }>({ show: false, url: '', type: '' });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Заявка отправлена:', formData);
+    if (!contactConsent) return;
+    
+    setIsSubmitting(true);
+    setSubmitMessage('');
+    
+    try {
+      const response = await fetch('https://functions.poehali.dev/6fe93f8e-2857-46f7-9277-13b0f9922a30', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          description: formData.description,
+          leadType: 'general'
+        })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        setSubmitMessage('✅ Заявка отправлена! Свяжемся с вами в ближайшее время.');
+        setFormData({ name: '', phone: '', description: '' });
+        setContactConsent(false);
+      } else {
+        setSubmitMessage('❌ Ошибка отправки. Попробуйте позвонить: +7 (908) 449-89-85');
+      }
+    } catch (error) {
+      setSubmitMessage('❌ Ошибка отправки. Попробуйте позвонить: +7 (908) 449-89-85');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleSocialClick = (url: string, type: string) => {
@@ -346,7 +378,55 @@ const Index = () => {
                     <p className="text-sm text-gray-600">Оставьте контакт — отправим PDF</p>
                   </div>
                 </div>
-                <form onSubmit={(e) => { e.preventDefault(); if (guideConsent) { alert('Спасибо! Гайд отправлен'); setGuideData({ name: '', phone: '', email: '' }); setGuideConsent(false); } }} className="space-y-3">
+                <form onSubmit={async (e) => {
+                  e.preventDefault();
+                  if (!guideConsent) return;
+                  
+                  setIsSubmitting(true);
+                  
+                  try {
+                    const leadResponse = await fetch('https://functions.poehali.dev/6fe93f8e-2857-46f7-9277-13b0f9922a30', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({
+                        name: guideData.name,
+                        phone: guideData.phone,
+                        email: guideData.email,
+                        leadType: 'guide'
+                      })
+                    });
+                    
+                    const leadData = await leadResponse.json();
+                    
+                    if (leadData.success) {
+                      const pdfResponse = await fetch('https://functions.poehali.dev/bac06aa4-3648-4435-a2c3-1b1ae4a7cdb8', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                          email: guideData.email,
+                          name: guideData.name
+                        })
+                      });
+                      
+                      const pdfData = await pdfResponse.json();
+                      
+                      if (pdfData.success) {
+                        alert('✅ Спасибо! Гайд отправлен на вашу почту.');
+                      } else {
+                        alert('✅ Заявка принята! Гайд будет отправлен в ближайшее время.');
+                      }
+                      
+                      setGuideData({ name: '', phone: '', email: '' });
+                      setGuideConsent(false);
+                    } else {
+                      alert('❌ Ошибка отправки. Попробуйте позвонить: +7 (908) 449-89-85');
+                    }
+                  } catch (error) {
+                    alert('❌ Ошибка отправки. Попробуйте позвонить: +7 (908) 449-89-85');
+                  } finally {
+                    setIsSubmitting(false);
+                  }
+                }} className="space-y-3">
                   <Input
                     type="text"
                     placeholder={t.guide.name}
@@ -386,11 +466,11 @@ const Index = () => {
                   <Button 
                     type="submit" 
                     size="lg" 
-                    disabled={!guideConsent}
+                    disabled={!guideConsent || isSubmitting}
                     className="bg-yellow-500 hover:bg-yellow-600 text-yellow-900 font-bold px-6 py-5 text-base shadow-lg disabled:opacity-50 w-full"
                   >
                     <Icon name="Download" size={18} className="mr-2" />
-                    {t.guide.get}
+                    {isSubmitting ? 'Отправка...' : t.guide.get}
                   </Button>
                 </form>
               </div>
@@ -591,7 +671,14 @@ const Index = () => {
                     </a>
                   </span>
                 </label>
-                <Button type="submit" disabled={!contactConsent} className="w-full py-5 text-base disabled:opacity-50 disabled:cursor-not-allowed">Отправить заявку</Button>
+                <Button type="submit" disabled={!contactConsent || isSubmitting} className="w-full py-5 text-base disabled:opacity-50 disabled:cursor-not-allowed">
+                  {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
+                </Button>
+                {submitMessage && (
+                  <p className={`text-sm mt-2 text-center ${submitMessage.includes('✅') ? 'text-green-600' : 'text-red-600'}`}>
+                    {submitMessage}
+                  </p>
+                )}
               </form>
             </Card>
           </div>
@@ -635,6 +722,18 @@ const Index = () => {
                     <Icon name="MessageSquare" size={16} /> WeChat
                   </button>
                 </div>
+              </div>
+              <div>
+                <h3 className="font-bold text-lg mb-3">Администрирование</h3>
+                <button
+                  onClick={() => {
+                    window.open('https://functions.poehali.dev/e009158c-af20-457e-bde5-fb383f00dd28', '_blank');
+                  }}
+                  className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors"
+                >
+                  <Icon name="Download" size={16} />
+                  Скачать все заявки (CSV)
+                </button>
               </div>
               <div>
                 <h3 className="font-bold text-lg mb-3">Режим работы</h3>
