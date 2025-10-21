@@ -179,41 +179,27 @@ const Index = () => {
       />
       
       {/* Floating Contact Buttons */}
-      <div className="fixed left-4 bottom-4 z-50 flex flex-col gap-3">
+      <div className="fixed right-4 top-20 z-50 flex flex-row gap-3">
         <button
           onClick={() => handleSocialClick('https://t.me/fisenko_advocate', 'telegram')}
-          className="bg-[#0088cc] text-white rounded-full p-3 sm:p-4 shadow-2xl hover:scale-110 transition-transform"
+          className="bg-[#0088cc] text-white rounded-full p-3 shadow-2xl hover:scale-110 transition-transform"
           aria-label="Telegram"
         >
-          <Icon name="Send" size={24} className="sm:w-8 sm:h-8" />
-        </button>
-        <button
-          onClick={() => handleSocialClick('https://t.me/family_advocate_dv', 'telegram-channel')}
-          className="bg-[#0088cc] text-white rounded-full p-3 sm:p-4 shadow-2xl hover:scale-110 transition-transform"
-          aria-label="Telegram Канал"
-        >
-          <Icon name="Radio" size={24} className="sm:w-8 sm:h-8" />
+          <Icon name="Send" size={20} />
         </button>
         <button
           onClick={() => handleSocialClick('https://wa.me/79084498985', 'whatsapp')}
-          className="bg-[#25D366] text-white rounded-full p-3 sm:p-4 shadow-2xl hover:scale-110 transition-transform"
+          className="bg-[#25D366] text-white rounded-full p-3 shadow-2xl hover:scale-110 transition-transform"
           aria-label="WhatsApp"
         >
-          <Icon name="MessageCircle" size={24} className="sm:w-8 sm:h-8" />
+          <Icon name="MessageCircle" size={20} />
         </button>
         <button
           onClick={() => handleSocialClick('weixin://', 'wechat')}
-          className="bg-[#09b83e] text-white rounded-full p-3 sm:p-4 shadow-2xl hover:scale-110 transition-transform"
+          className="bg-[#09b83e] text-white rounded-full p-3 shadow-2xl hover:scale-110 transition-transform"
           aria-label="WeChat"
         >
-          <Icon name="MessageSquare" size={24} className="sm:w-8 sm:h-8" />
-        </button>
-        <button
-          onClick={() => handleSocialClick('https://vk.com', 'vk')}
-          className="bg-[#0077FF] text-white rounded-full p-3 sm:p-4 shadow-2xl hover:scale-110 transition-transform"
-          aria-label="VK"
-        >
-          <Icon name="Share2" size={24} className="sm:w-8 sm:h-8" />
+          <Icon name="MessageSquare" size={20} />
         </button>
       </div>
       
@@ -276,9 +262,6 @@ const Index = () => {
           <div className="container mx-auto px-4 max-w-6xl">
             <div className="grid lg:grid-cols-2 gap-6 items-start">
               <div className="space-y-4 sm:space-y-6">
-                <div className="bg-yellow-400 text-yellow-900 px-4 py-2 rounded-lg font-bold inline-block text-sm">
-                  Адвокат Антон Фисенко
-                </div>
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-montserrat font-bold leading-tight">
                   {t.hero.title}
                 </h1>
@@ -328,6 +311,10 @@ const Index = () => {
                   alt="Адвокат Антон Фисенко Владивосток" 
                   className="rounded-lg shadow-2xl w-full h-auto object-cover"
                 />
+                <div className="mt-4 text-center">
+                  <p className="text-xl sm:text-2xl font-bold text-white">Антон Фисенко</p>
+                  <p className="text-navy-100 text-sm sm:text-base">Адвокат с 15-летним стажем</p>
+                </div>
               </div>
             </div>
           </div>
@@ -582,10 +569,53 @@ const Index = () => {
 
         {/* Footer */}
         <footer className="bg-primary text-white py-8">
-          <div className="container mx-auto px-4 text-center">
-            <p className="text-sm sm:text-base mb-3">© 2024 Адвокат Антон Фисенко. Все права защищены.</p>
-            <p className="text-xs sm:text-sm text-navy-200">Владивосток, Приморский край</p>
-            <p className="text-xs sm:text-sm text-navy-200 mt-2">+7 (908) 449-89-85</p>
+          <div className="container mx-auto px-4">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+              <div>
+                <h3 className="font-bold text-lg mb-3">Контакты</h3>
+                <p className="text-navy-100 mb-2">Адвокат Антон Фисенко</p>
+                <p className="text-navy-100 mb-2">Владивосток, Приморский край</p>
+                <p className="text-navy-100">+7 (908) 449-89-85</p>
+              </div>
+              <div>
+                <h3 className="font-bold text-lg mb-3">Социальные сети</h3>
+                <div className="space-y-2">
+                  <button
+                    onClick={() => handleSocialClick('https://t.me/fisenko_advocate', 'telegram')}
+                    className="flex items-center gap-2 text-navy-100 hover:text-white transition-colors"
+                  >
+                    <Icon name="Send" size={16} /> Telegram (чат)
+                  </button>
+                  <button
+                    onClick={() => handleSocialClick('https://t.me/family_advocate_dv', 'telegram-channel')}
+                    className="flex items-center gap-2 text-navy-100 hover:text-white transition-colors"
+                  >
+                    <Icon name="Radio" size={16} /> Telegram (канал)
+                  </button>
+                  <button
+                    onClick={() => handleSocialClick('https://wa.me/79084498985', 'whatsapp')}
+                    className="flex items-center gap-2 text-navy-100 hover:text-white transition-colors"
+                  >
+                    <Icon name="MessageCircle" size={16} /> WhatsApp
+                  </button>
+                  <button
+                    onClick={() => handleSocialClick('weixin://', 'wechat')}
+                    className="flex items-center gap-2 text-navy-100 hover:text-white transition-colors"
+                  >
+                    <Icon name="MessageSquare" size={16} /> WeChat
+                  </button>
+                </div>
+              </div>
+              <div>
+                <h3 className="font-bold text-lg mb-3">Режим работы</h3>
+                <p className="text-navy-100 mb-2">Пн-Пт: 9:00 - 19:00</p>
+                <p className="text-navy-100 mb-2">Сб-Вс: по записи</p>
+                <p className="text-yellow-400 font-semibold">🕐 Круглосуточная поддержка</p>
+              </div>
+            </div>
+            <div className="border-t border-navy-700 pt-4 text-center">
+              <p className="text-sm text-navy-200">© 2024 Адвокат Антон Фисенко. Все права защищены.</p>
+            </div>
           </div>
         </footer>
       </div>
